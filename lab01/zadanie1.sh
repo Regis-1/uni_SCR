@@ -4,10 +4,10 @@ LC_TIME=C
 
 day=`date | cut -d ' ' -f 1`
 
-if [ $day == 'Wed' ]
+if [ $day != 'Sat' ] && [ $day != 'Sun' ]
 then
-	echo "wed"
+	echo "weekday"
 else
-	echo "not wed"
+	echo "weekend"
 fi
 
