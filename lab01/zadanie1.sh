@@ -2,12 +2,12 @@
 
 LC_TIME=C
 
-day=`date | cut -d ' ' -f 1`
+day=`date +%u`
 
-if [ $day != 'Sat' ] && [ $day != 'Sun' ]
+if [ $day != 6 ] && [ $day != 7 ]
 then
-	echo "weekday"
+	echo "Jest dzien roboczy."
 else
-	echo "weekend"
+	echo "Jest weekend"
 fi
 
