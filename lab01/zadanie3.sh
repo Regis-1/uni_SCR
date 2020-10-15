@@ -1,3 +1,5 @@
 #!/bin/bash
 
-find . -name "$1"
+$wynik=`find . -name "$1" -mtime "-$2"`
+
+#tworzenie archiwum tar
