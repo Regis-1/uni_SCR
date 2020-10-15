@@ -4,7 +4,7 @@ LC_TIME=C
 
 day=`date +%u`
 
-if [ $day != 6 ] && [ $day != 7 ]
+if [ $day -lt 5 ]
 then
 	echo "Jest dzien roboczy."
 else
