@@ -1,4 +1,6 @@
 Po wciśnięciu skrótu Ctrl-Z program xclock został wstrzymany, a po wpisaniu komendy 'fg' został wznowiony.
-Działanie Ctrl-Z oraz komendy 'fg' różni się od wysłania sygnału 'SIGSTOP' z innego terminala, ponieważ proces ten został wstrzymany, natomiast terminal który był wcześniej przez niego wstrzymany został zwolniony (można było wykonywać inne komendy). Po wysłaniu sygnału 'SIGCONT' program xclock od razu się zaktualizował oraz działał już w tle.
+Działanie Ctrl-Z oraz komendy 'fg' różni się od wysłania sygnału 'SIGSTOP' z innego terminala, ponieważ proces ten został wstrzymany,
+natomiast terminal który był wcześniej przez niego wstrzymany został zwolniony (można było wykonywać inne komendy). Po wysłaniu sygnału
+'SIGCONT' program xclock od razu się zaktualizował oraz działał już w tle.
 
 Zrzuty ekranów: z6_1.jpg oraz z6_2.jpg
