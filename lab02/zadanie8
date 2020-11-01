@@ -1,0 +1,6 @@
+Polecenie 'ulimit' pozwala zapobiec zaplanować ile procesów może być wykonywane w danej powłoce, dzięki czemu
+nadmiernie powielające się skrypty/procesy mogą zostać opanowane. Przy skrypcie powielającym się 500 razy i
+ustawieniu 'ulimit -u 300' pokazują się komunikaty o tym, że nie ma już wystarczająco zasobów by móc stworzyć
+301. i następne kopie tego skryptu.
+
+Zrzut ekratu do tego zadania: z8.jpg
