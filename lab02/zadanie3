@@ -1,0 +1,3 @@
+Widoczne na zrzucie z ekranu 'z3.jpg' jest pokrewieństwo pomiędzy tymi trzema procesami, które polega na
+tym, że mają one tego samego rodzica (proces PID 1812). One same jednak są osobnymi procesami, jednak
+zostały stworzone kolejno po sobie co mogą pokazywać ich PID (kolejno 1898, 1899 i 1900).
