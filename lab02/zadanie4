@@ -1,0 +1,3 @@
+Jak widać na zrzucie ekranu "z4_screenshot.jpg" komunikaty wpisywane do potoku przez dwa terminale (górny i dolny po lewej stronie)
+były losowo rozdzielane do odczytujących terminali (górny i dolny po stronie prawej). Polecenie 'cat' kończy pracę przy odczytywaniu
+danych dopiero wtedy, kiedy wszystkie procesy zapisujące zostały zamknięte/zabite.
