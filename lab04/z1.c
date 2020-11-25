@@ -1,51 +1,61 @@
-#include <stdio.h> 
-#include <unistd.h> 
-#include <fcntl.h> 
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
 
-#define BUF_SIZE 256
+#define BUFFER_SIZE 32 //rozmiar bufora
 
-int main(int argc, char** argv) {
+int main(int argc, char *argv[]) {
+    int pipefds[2];
+    char buffer[BUFFER_SIZE];
 
-    pid_t pid;
-    int fd[2], in_fd, n;
-    char buf[BUF_SIZE];
-    char* fname = NULL;
-    
-    if(argc > 1)
-    {
-    	printf("No filename as program's argument!\n");
-		return 1;
-	}
-    
-    if(pipe(fd) < 0)
-    {
-        fprintf(stderr, "Failed creating pipe\n");
-        return 2;
+	//sprawdzanie argumentow
+    if (argc < 2) {
+        fprintf(stderr, "usage: progname <filename>");
+        exit(EXIT_FAILURE);
     }
 
-    pid = fork();
-
-    if(pid == 0)
-    {
-    	close(fd[1]);
-        
+	//tworzenie pipe'ow
+    if (pipe(pipefds) == -1) {
+        perror("PIPE ERROR");
+        exit(EXIT_FAILURE);
     }
-    else
-    {
-    	close(fd[0]);
-    
-        if((in_fd = open(fname, O_RDONLY)) < 0)
-        {
-            fprintf(stderr, "Failed opening file\n");
-            return 3;
+
+	//tworzenie potomnego potoku
+    pid_t pid = fork();
+
+    if (pid == 0) {
+    	close(pipefds[1]); //zamkniecie potoku write
+
+        ssize_t n;
+        while ((n = read(pipefds[0], buffer, sizeof(buffer) - 1)) > 0) 			{
+            buffer[n] = '\0';
+            printf("#%s#", buffer);
+
         }
-        
-        while((n = read(in_fd, &buf, BUF_SIZE)) > 0)
-        {
-            if(write(fd[1], &buf, n) < 0) {
-                fprintf(stderr, "Failed writing to pipe\n");
-                return 4;
-            }  
+        close(pipefds[0]);	      
+    }
+    else if (pid > 0) {
+        FILE *fptr;
+        if ((fptr = fopen(argv[1], "r")) == NULL) {
+            perror("error opening file");
+            exit(EXIT_FAILURE);
         }
-    } 
+
+        char singleLine[BUFFER_SIZE];
+        close(pipefds[0]);
+        //odczytywanie pliku
+        while (fgets(singleLine, sizeof(singleLine), fptr)) {
+            write(pipefds[1], singleLine, strlen(singleLine));
+        }
+        int error = ferror(fptr);
+        fclose(fptr);
+        if (error) {
+            perror("error reading file");
+            exit(EXIT_FAILURE);
+        }
+        exit(EXIT_SUCCESS);
+    }
+
+    return 0;
 }
