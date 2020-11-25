@@ -2,11 +2,12 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <fcntl.h>
 
 #define BUFFER_SIZE 32 //rozmiar bufora
 
 int main(int argc, char *argv[]) {
-    int pipefds[2];
+    int pipefds[2], in_fd, n;
     char buffer[BUFFER_SIZE];
 
 	//sprawdzanie argumentow
@@ -21,42 +22,47 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-	//tworzenie potomnego potoku
+	//tworzenie potomnego procesu
     pid_t pid = fork();
 
     if (pid == 0) {
-    	close(pipefds[1]);
+    	//potomek
+        close(pipefds[1]); //zamkniecie potoku write
         close(0);
-        dup(pipefds[0]);
+        dup(pipefds[0]); //duplikacja potoku
         close(pipefds[0]);
 
-        //!!!REALLY IMPORTANT!!!
-        //Arguments which you pass to execlp depends on image dispaly program that you are
-        //using. Always check what arguments need to be provided in order to read the image
-        //from stdin. E.g. ImageMagick accepts NULL or "-".GraphicsMagick on the other hand
-        //accepts only "-".
+        //wykorzystanie funkcji display programu ImageMagick
+        //z parametrem "-" do pobrania danych odczytanych przez potok
         execlp("display", "display", "-", NULL);	      
     }
-    else if (pid > 0) {
+    else if (pid > 0)
+    {
+    	//rodzic
         FILE *fptr;
         if ((fptr = fopen(argv[1], "r")) == NULL) {
             perror("error opening file");
             exit(EXIT_FAILURE);
         }
-
-        char singleLine[BUFFER_SIZE];
         close(pipefds[0]);
-        //odczytywanie pliku
-        while (fgets(singleLine, sizeof(singleLine), fptr)) {
-            write(pipefds[1], singleLine, strlen(singleLine));
+
+        if((in_fd = open(argv[1], O_RDONLY)) < 0)
+        {
+            
+            fprintf(stderr, "Failed opening file\n");
+            return 2;
         }
-        int error = ferror(fptr);
-        fclose(fptr);
-        if (error) {
-            perror("error reading file");
-            exit(EXIT_FAILURE);
+        
+        while((n = read(in_fd, &buffer, BUFFER_SIZE)) > 0)
+        {
+        	//odczytywanie danych z wybranego obrazu
+            if(write(pipefds[1], &buffer, n) < 0)
+            {
+                fprintf(stderr, "Failed writing to pipe\n");
+                return 3;
+            }  
         }
-        exit(EXIT_SUCCESS);
+        close(in_fd);
     }
 
     return 0;

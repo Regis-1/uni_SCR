@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-	//tworzenie potomnego potoku
+	//tworzenie potomnego procesu
     pid_t pid = fork();
 
     if (pid == 0) {
