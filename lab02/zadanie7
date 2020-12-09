@@ -1,0 +1,4 @@
+Poleceni 'nice' służy do uruchomienia procesu już ze zmienioną liczbą nice, natomiast polecenie 'renice'
+pozwala na zmianę tej liczby nawet w trakcie działania procesu.
+
+Zrzuty ekranu do zadania: z7_1.jpg z7_2.jpg

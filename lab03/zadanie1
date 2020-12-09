@@ -1,0 +1,10 @@
+Powodem, dla którego zwykła pętla tylko z instrukcją "i++" pobiera praktycznie całość dostępnych zasobów procesora
+jest fakt, że jest to pętla, w której nie ma momentu, by procesor musiał poczekać na jakiś inny proces lub po prostu
+został zmuszony do poczekania. W ten sposób wie on o tym, że jest w stanie ciągle wykonywać zadane instrukcje
+dlatego zostaje mu nadane 100% procesora.
+W drugim przypadku, gdy mamy pętlę z dodatkową instrukcją "nanosleep()", która każe czekać procesorowi 100 ms, jest
+widoczne, że w trakcie tego zmuszonego postoju system operacyjny wie, ze jest w stanie przez te 100ms oczekiwania
+(które to dla czasu działania procesora są długim oczekiwaniem) wykonać wiele innych procesów już uruchomionych.
+W ten sposób zasoby nie są przeznaczane wyłącznie na wykonywanie instrukcji "i++".
+
+Zrzuty ekranu do zadania: z1_screen1.jpg z1_screen2.jpg

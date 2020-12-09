@@ -1,0 +1,3 @@
+Przed wykorzystaniem komendy 'trap' proces kończył swoje działanie po wysłaniu każdego z podanych sygnałów:
+SIGINT, SIGQUIT, SIGFPE, SIGILL. Dzięki zastosowaniu polecenia 'trap' możliwa stała się praca procesu po
+otrzymaniu wyżej wymienionych sygnałów, jednak polecenie to nie jest w stanie zignorować synału SIGKILL (9).
