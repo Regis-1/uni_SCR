@@ -19,6 +19,7 @@ int main(int argc, char **argv)
 		printf("Enter a filename for mapping: ");
 		scanf("%s", userInput);
 
+		//Kontrolowane zakonczenie programu
 		if(strcmp(userInput, "quit") == 0)
 			break;
 
@@ -37,6 +38,7 @@ int main(int argc, char **argv)
 			return -1;
 		}
 
+		//Mapowanie pliku do pamieci roboczej
 		pMap = mmap(NULL, statbuf.st_size, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0);
 		if(pMap == MAP_FAILED)
 		{
@@ -46,9 +48,11 @@ int main(int argc, char **argv)
 
 		close(fd);
 
+		//Zmiana zawartosci w pliku by bylo to widoczne
 		for(unsigned int i = 0; i < strlen(pChangedPart); i++)
 			pMap[i] = pChangedPart[i];
 
+		//Wypisanie zawartosci zmienionego juz obszaru pamieci
 		ssize_t n = write(1, pMap, statbuf.st_size);
 		if(n != statbuf.st_size)
 		{
