@@ -1,0 +1,9 @@
+Pliki w folderze /proc nie są typowym rodzajem plików, ponieważ ich rozmiar wynosi 0 (poza paroma wyjątkami). Są to
+tzw. pliki wirtualne, które to tak naprawdę są tworzone dopiero wtedy gdy mamy zamiar coś z nich odczytać. Zawierają
+one w sobie wszelkie informacje odnośnie systemu oraz procesów na nim działających.
+Przykładem może być plik "cpuinfo", w którym zapisane są informacje dotyczące procesora danego komputera (plik z3_screen1.jpg)
+
+W folderze /proc znajduje się również wiele folderów, które w nazwie mają tylko liczbę. Są to pliki dotyczące
+procesów o zadanym właśnie PID. W takim folderze znajduje się wiele plików będących informacjami odnośnie samych
+procesów, takimi jak nadana pamięć, komenda wywołująca dany proces, czas jego działania, id uzytkownika oraz grupy itd.
+(plik z3_screen2.jpg)

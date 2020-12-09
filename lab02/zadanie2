@@ -1,0 +1,14 @@
+UID          PID    PPID  C STIME TTY          TIME CMD
+jakubd      1318    1167  0 19:38 pts/0    00:00:00 bash
+jakubd      1324    1318  0 19:38 pts/0    00:00:00 bash
+jakubd      1330    1324  0 19:38 pts/0    00:00:00 bash
+jakubd      1337    1330  0 19:38 pts/0    00:00:00 ps -af
+
+Po użyciu komendy 'kill -9 1324'
+
+UID          PID    PPID  C STIME TTY          TIME CMD
+jakubd      1318    1167  0 19:38 pts/0    00:00:00 bash
+jakubd      1330       1  0 19:38 pts/0    00:00:00 bash
+jakubd      1340    1330  0 19:38 pts/0    00:00:00 ps -af
+
+Jak widać na powyższych listingach po zabiciu procesu 1324, jego proces potomny został adoptowany przez proces o PID = 1, czyli przez proces 'init'
