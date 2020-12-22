@@ -19,3 +19,10 @@ a następnie zostaje ona zrzutowana z powrotem na swój typ w funkcji wątku. W 
 ces wygląda tak samo, jednak bez "pakowania" zmiennej do struktury.
 
 Bug w programie "bug3.c" polegał na zbyt złożonym rzutowaniu zmiennej wewnątrz funkcji wątku.
+
+Zad. 4.
+Problem w programie polegał na tym, że stworzone wątki mają zbyt mało czasu na wykonanie się, ponieważ wątek główny
+po dojściu do końca swoich instrukcji powoduje zamknięcie programu nie czekając na skończenie wykonywania się wątków
+wcześniej stworzonych. W celu naprawy tego błędu należało dodać pętlę z funkcją "pthread_join", dzięki której wątek
+główny wie, że ma zaczekać na skończenie każdego z utworzonych wątków, po czym dopiero możliwe będzie zakończenie
+pracy całego programu.
