@@ -1,0 +1,34 @@
+Zad. 1.
+Program wykonał się dokładnie tak jak się spodziewałem. Została utworzona odpowiednia liczba wątków, które to wykonały
+funkcję "thread_function" wypisującą odpowiedni komunikat na standardowym wyjściu. Różnica w wartościach ID wątków
+stworzonych przeze mnie a tymi z programu "hello.c" polega na tym, że tam została wykorzystana zmienna iterowana jako
+ID wątku, natomiast w moim programie zastosowałem wbudowaną w bibliotekę funkcję "pthread_self", która to zwraca ID
+wątku, w którym została wywołana.
+
+Zad. 2.
+Kolejność wykonywania wątków w programie "hello32.c" jest zmienna, ale można zauważyć w niej pewną zależność. Po
+uruchomieniu programu parę razy spostrzec można, że wątki wcześniej rozpoczęte (o małym/jednocyfrowym id) są wykony-
+wane szybiej niż te uruchomione później, co jest prawidłowym działaniem.
+Taka zmienna kolejność wynika z tego, że wszystkie wątki mają takie same priorytety, natomiast planista musi na bieżą-
+co zapewniać zasoby dla jednego wątku, przy okazji wykonując obliczenia dla drugiego itd.
+
+Zad. 3.
+Argumenty są przekazywane do funkcji "pthread_create" jako wskaźniki typu "void" (void *). Jeżeli chcemy przekazać
+wiele argumentów zostaje wówczas przekazany wskaźnik typu "void" na strukturę, która zawiera w sobie dane,
+a następnie zostaje ona zrzutowana z powrotem na swój typ w funkcji wątku. W przypadku pojedynczej zmiennej cały pro-
+ces wygląda tak samo, jednak bez "pakowania" zmiennej do struktury.
+
+Bug w programie "bug3.c" polegał na zbyt złożonym rzutowaniu zmiennej wewnątrz funkcji wątku.
+
+Zad. 4.
+Problem w programie polegał na tym, że stworzone wątki mają zbyt mało czasu na wykonanie się, ponieważ wątek główny
+po dojściu do końca swoich instrukcji powoduje zamknięcie programu nie czekając na skończenie wykonywania się wątków
+wcześniej stworzonych. W celu naprawy tego błędu należało dodać pętlę z funkcją "pthread_join", dzięki której wątek
+główny wie, że ma zaczekać na skończenie każdego z utworzonych wątków, po czym dopiero możliwe będzie zakończenie
+pracy całego programu.
+
+Zad. 5.
+Różnica w programach polegała na użyciu dwóch różnych konwencji wątków. Jeden program wykorzystuje wątki "detached"
+(takie, które po zakończeniu procesu zwalniają zasoby), drugi z kolei korzysta z wątków "joinable" (takich, które czekają na funkcję "pthread_join" by zwrócić zasoby).
+Jak wspomniał również autor kodu w komentarzu w pliku "detached.c" wątki w stanie "detached" pozwalają zaoszczędzić
+pewną część zasobów, ponieważ wątki te nie będą czekały na końcowe "złączenie".

@@ -1,0 +1,20 @@
+    PID TTY          TIME CMD
+   1269 pts/0    00:00:00 bash
+   1661 pts/0    00:00:00 ps
+
+Jak widać na powyższym listingu przykładowe użycie polecenia 'ps' wyświetla działanie dwóch procesów.
+
+
+jakubd      1685  0.0  0.0  11568   728 pts/0    S+   12:17   0:00 grep --color=auto sshd
+
+W chwili wykonywania ćwiczenia w moim systemie istniał tylko jeden proces 'sshd'. 
+
+Listing użycia polecenia 'ps -l'
+F S   UID     PID    PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+0 S  1000    1269    1266  0  80   0 -  3398 do_wai pts/0    00:00:00 bash
+0 R  1000    1698    1269  0  80   0 -  3484 -      pts/0    00:00:00 ps
+
+Listing użycia polecenia 'ps -f'
+UID          PID    PPID  C STIME TTY          TIME CMD
+jakubd      1269    1266  0 12:08 pts/0    00:00:00 /bin/bash
+jakubd      1699    1269  0 12:18 pts/0    00:00:00 ps -f
