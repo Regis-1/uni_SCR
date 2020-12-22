@@ -4,3 +4,10 @@ funkcję "thread_function" wypisującą odpowiedni komunikat na standardowym wyj
 stworzonych przeze mnie a tymi z programu "hello.c" polega na tym, że tam została wykorzystana zmienna iterowana jako
 ID wątku, natomiast w moim programie zastosowałem wbudowaną w bibliotekę funkcję "pthread_self", która to zwraca ID
 wątku, w którym została wywołana.
+
+Zad. 2.
+Kolejność wykonywania wątków w programie "hello32.c" jest zmienna, ale można zauważyć w niej pewną zależność. Po
+uruchomieniu programu parę razy spostrzec można, że wątki wcześniej rozpoczęte (o małym/jednocyfrowym id) są wykony-
+wane szybiej niż te uruchomione później, co jest prawidłowym działaniem.
+Taka zmienna kolejność wynika z tego, że wszystkie wątki mają takie same priorytety, natomiast planista musi na bieżą-
+co zapewniać zasoby dla jednego wątku, przy okazji wykonując obliczenia dla drugiego itd.
