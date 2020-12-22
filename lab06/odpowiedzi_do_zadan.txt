@@ -1,0 +1,6 @@
+Zad. 1.
+Program wykonał się dokładnie tak jak się spodziewałem. Została utworzona odpowiednia liczba wątków, które to wykonały
+funkcję "thread_function" wypisującą odpowiedni komunikat na standardowym wyjściu. Różnica w wartościach ID wątków
+stworzonych przeze mnie a tymi z programu "hello.c" polega na tym, że tam została wykorzystana zmienna iterowana jako
+ID wątku, natomiast w moim programie zastosowałem wbudowaną w bibliotekę funkcję "pthread_self", która to zwraca ID
+wątku, w którym została wywołana.
