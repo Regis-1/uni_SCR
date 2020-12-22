@@ -11,3 +11,11 @@ uruchomieniu programu parę razy spostrzec można, że wątki wcześniej rozpocz
 wane szybiej niż te uruchomione później, co jest prawidłowym działaniem.
 Taka zmienna kolejność wynika z tego, że wszystkie wątki mają takie same priorytety, natomiast planista musi na bieżą-
 co zapewniać zasoby dla jednego wątku, przy okazji wykonując obliczenia dla drugiego itd.
+
+Zad. 3.
+Argumenty są przekazywane do funkcji "pthread_create" jako wskaźniki typu "void" (void *). Jeżeli chcemy przekazać
+wiele argumentów zostaje wówczas przekazany wskaźnik typu "void" na strukturę, która zawiera w sobie dane,
+a następnie zostaje ona zrzutowana z powrotem na swój typ w funkcji wątku. W przypadku pojedynczej zmiennej cały pro-
+ces wygląda tak samo, jednak bez "pakowania" zmiennej do struktury.
+
+Bug w programie "bug3.c" polegał na zbyt złożonym rzutowaniu zmiennej wewnątrz funkcji wątku.
