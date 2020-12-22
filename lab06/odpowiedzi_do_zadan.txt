@@ -26,3 +26,9 @@ po dojściu do końca swoich instrukcji powoduje zamknięcie programu nie czekaj
 wcześniej stworzonych. W celu naprawy tego błędu należało dodać pętlę z funkcją "pthread_join", dzięki której wątek
 główny wie, że ma zaczekać na skończenie każdego z utworzonych wątków, po czym dopiero możliwe będzie zakończenie
 pracy całego programu.
+
+Zad. 5.
+Różnica w programach polegała na użyciu dwóch różnych konwencji wątków. Jeden program wykorzystuje wątki "detached"
+(takie, które po zakończeniu procesu zwalniają zasoby), drugi z kolei korzysta z wątków "joinable" (takich, które czekają na funkcję "pthread_join" by zwrócić zasoby).
+Jak wspomniał również autor kodu w komentarzu w pliku "detached.c" wątki w stanie "detached" pozwalają zaoszczędzić
+pewną część zasobów, ponieważ wątki te nie będą czekały na końcowe "złączenie".
